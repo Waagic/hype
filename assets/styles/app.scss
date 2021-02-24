@@ -1,0 +1,28 @@
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import "../../node_modules/nes.css/css/nes.css";
+
+body{
+  font-family: "Press Start 2P", serif;
+}
+
+.jeu_show {
+
+  h1 {
+    text-align: center;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .media {
+
+    .screenshots {
+      img {
+        max-width: 560px;
+      }
+    }
+
+  }
+
+}

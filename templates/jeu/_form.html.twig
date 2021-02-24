@@ -1,0 +1,29 @@
+<div>
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.genre) }}
+    {{ form_row(form.prix) }}
+    <div class="methodLinks-container">
+        <label class="col-form-label">Screenshots</label>
+        <div class="js-methodLink-wrapper"
+             data-prototype="{{ form_widget(form.screenshot.vars.prototype)|e('html_attr') }}"
+             data-index="{{ form.screenshot|length }}">
+            {% for screenshot in form.screenshot %}
+                <div class="js-methodLink-item">
+                    {{ form_errors(screenshot) }}
+                    {{ form_row(screenshot.fileUpload) }}
+                    {{ form_row(screenshot.title) }}
+                </div>
+            {% endfor %}
+        </div>
+        <a href="#" class="js-add-methodLink">
+            <label class="col-form-label text-white">Ajouter un screenshot</label>
+        </a>
+    </div>
+    {{ form_row(form.video) }}
+    {{ form_row(form.lien) }}
+    {{ form_row(form.what) }}
+    {{ form_row(form.why) }}
+    <button class="btn btn-secondary form-button mt-2">{{ button_label|default('Creer le jeu') }}</button>
+    {{ form_end(form) }}
+</div>

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeu{% endblock %}
+
+{% block body %}
+    <div class="jeu_show container">
+        <h1>{{ jeu.nom }}</h1>
+        <div class="infos nes-container with-title mt-5">
+            <p class="title">Infos</p>
+            <div class="price">Prix : {{ jeu.prix }}€</div>
+            <div class="genre">Genre : {{ jeu.genre }}</div>
+            <div class="link"><a href="{{ jeu.lien }}">Lien Steam</a></div>
+        </div>
+        <div class="what nes-container with-title mt-5">
+            <p class="title">C'est quoi ?</p>
+            <div class="what_content">{{ jeu.what }}</div>
+        </div>
+        <div class="why nes-container with-title mt-5">
+            <p class="title">Pourquoi c'est bien ?</p>
+            <div class="why_content">{{ jeu.why }}</div>
+        </div>
+
+        <div class="media flex-column nes-container with-title mt-5">
+            <p class="title">Screenshots et vidéo</p>
+                <div class="screenshots mb-3">
+                    {% for screenshot in jeu.screenshot %}
+                        <img
+                                src="{{ asset('uploads/jeux/screenshots/' ~ screenshot.file) }}"
+                                alt=""/>
+                    {% endfor %}
+                </div>
+                <div class="video">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ jeu.video }}" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+        </div>
+
+        <a href="{{ path('jeu_index') }}">back to list</a>
+
+        <a href="{{ path('jeu_edit', {'id': jeu.id}) }}">edit</a>
+
+        {{ include('jeu/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
