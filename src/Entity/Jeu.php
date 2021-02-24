@@ -65,6 +65,16 @@ class Jeu
      */
     private $screenshot;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cover;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $thumbnail;
+
     public function __construct()
     {
         $this->screenshot = new ArrayCollection();
@@ -185,6 +195,30 @@ class Jeu
                 $screenshot->setJeu(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): self
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(string $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }

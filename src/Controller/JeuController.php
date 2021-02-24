@@ -10,14 +10,42 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * @Route("/jeu")
+ * @Route("/")
  */
 class JeuController extends AbstractController
 {
     /**
+     * @Route("/login", name="app_login")
+     */
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        // if ($this->getUser()) {
+        //     return $this->redirectToRoute('target_path');
+        // }
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    }
+
+    /**
+     * @Route("/logout", name="app_logout")
+     */
+    public function logout()
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    /**
      * @Route("/", name="jeu_index", methods={"GET"})
+     * @param JeuRepository $jeuRepository
+     * @return Response
      */
     public function index(JeuRepository $jeuRepository): Response
     {
@@ -39,6 +67,19 @@ class JeuController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $cover = $form->get('cover')->getData();
+            if ($cover) {
+                $pictureFileName = $fileUploader->upload($cover, $this->getParameter('covers_directory'));
+                $jeu->setCover($pictureFileName);
+            }
+
+            $thumbnail = $form->get('thumbnail')->getData();
+            if ($thumbnail) {
+                $pictureFileName = $fileUploader->upload($thumbnail, $this->getParameter('thumbnails_directory'));
+                $jeu->setThumbnail($pictureFileName);
+            }
+
             $screenshots = $form->get('screenshot')->all();
             if ($screenshots) {
                 foreach ($screenshots as $screenshot) {
@@ -71,6 +112,10 @@ class JeuController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="jeu_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Jeu $jeu
+     * @param FileUploader $fileUploader
+     * @return Response
      */
     public function edit(Request $request, Jeu $jeu, FileUploader $fileUploader): Response
     {
@@ -79,6 +124,19 @@ class JeuController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $screenshots = $form->get('screenshot')->all();
+
+            $cover = $form->get('cover')->getData();
+            if ($cover) {
+                $pictureFileName = $fileUploader->upload($cover, $this->getParameter('covers_directory'));
+                $jeu->setCover($pictureFileName);
+            }
+
+            $thumbnail = $form->get('thumbnail')->getData();
+            if ($thumbnail) {
+                $pictureFileName = $fileUploader->upload($thumbnail, $this->getParameter('thumbnails_directory'));
+                $jeu->setThumbnail($pictureFileName);
+            }
+
             foreach ($screenshots as $screenshot) {
                 $fileUpload = $screenshot->get('fileUpload')->getData();
                 if ($fileUpload) {

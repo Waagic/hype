@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     screenshots_directory : '%kernel.project_dir%/public/uploads/jeux/screenshots'
+    covers_directory : '%kernel.project_dir%/public/uploads/jeux/covers'
+    thumbnails_directory : '%kernel.project_dir%/public/uploads/jeux/thumbnails'
 
 services:
     # default configuration for services in *this* file

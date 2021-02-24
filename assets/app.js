@@ -10,7 +10,7 @@ import "nes.css/css/nes.min.css";
 import './styles/app.scss';
 
 // start the Stimulus application
-import './bootstrap';
+import 'bootstrap';
 
 const $ = require('jquery');
 global.jQuery = $;

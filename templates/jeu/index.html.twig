@@ -3,45 +3,28 @@
 {% block title %}Jeu index{% endblock %}
 
 {% block body %}
-    <h1>Jeu index</h1>
+    <div class="container">
+        <div class="nes-container with-title mt-5">
+            <h1 class="title">J'suis tombé là dessus</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Genre</th>
-                <th>Prix</th>
-                <th>Video</th>
-                <th>Lien</th>
-                <th>What</th>
-                <th>Why</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for jeu in jeux %}
-            <tr>
-                <td>{{ jeu.id }}</td>
-                <td>{{ jeu.nom }}</td>
-                <td>{{ jeu.genre }}</td>
-                <td>{{ jeu.prix }}</td>
-                <td>{{ jeu.video }}</td>
-                <td>{{ jeu.lien }}</td>
-                <td>{{ jeu.what }}</td>
-                <td>{{ jeu.why }}</td>
-                <td>
-                    <a href="{{ path('jeu_show', {'id': jeu.id}) }}">show</a>
-                    <a href="{{ path('jeu_edit', {'id': jeu.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            {% for jeu in jeux %}
+                <div class="col-6 col-md-4 col-xl-3">
+                    <a href="{{ path('jeu_show', {'id': jeu.id}) }}">
+                        <div class="card media-card mb-4">
+                            <img class="card-img-top" src="{{ asset('uploads/jeux/thumbnails/' ~ jeu.thumbnail) }}">
+                            <div class="card-body">
+                                <p class="card-title">{{ jeu.nom }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% else %}
+                no records found
+            {% endfor %}
 
-    <a href="{{ path('jeu_new') }}">Create new</a>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a class="nes-btn is-success" href="{{ path('jeu_new') }}">Create new</a>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
