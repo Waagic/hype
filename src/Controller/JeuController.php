@@ -49,7 +49,6 @@ class JeuController extends AbstractController
      */
     public function index(JeuRepository $jeuRepository): Response
     {
-        touch("/var/hype.socialgeek.fr/public/test");
         return $this->render('jeu/index.html.twig', [
             'jeux' => $jeuRepository->findAll(),
         ]);
