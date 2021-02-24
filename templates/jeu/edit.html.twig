@@ -3,11 +3,17 @@
 {% block title %}Edit Jeu{% endblock %}
 
 {% block body %}
-    <h1>Edit Jeu</h1>
+    <div class="container">
+        <div class="nes-container with-title mt-5">
+            <h1 class="title">Edit Jeu</h1>
 
-    {{ include('jeu/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ include('jeu/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('jeu_index') }}">back to list</a>
+            <div class="boutons d-flex justify-content-center align-items-center">
+                <a class="nes-btn mt-3 w-100" href="{{ path('jeu_index') }}">Retour à la liste</a>
+            </div>
 
-    {{ include('jeu/_delete_form.html.twig') }}
+            {{ include('jeu/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

@@ -75,13 +75,17 @@ body{
   h2 {
     text-align: center;
   }
+}
 
-  .media {
+form {
+  width: 100%;
 
-    .screenshots {
-      img {
-      }
-    }
-
+  div {
+    margin-bottom: 1em;
   }
+
+  input, textarea {
+    width: 100%;
+  }
+
 }

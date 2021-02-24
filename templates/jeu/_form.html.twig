@@ -1,10 +1,14 @@
-<div>
+<div class="d-flex">
     {{ form_start(form) }}
     {{ form_row(form.nom) }}
-    {{ form_row(form.cover) }}
-    {{ form_row(form.thumbnail) }}
     {{ form_row(form.genre) }}
     {{ form_row(form.prix) }}
+    {{ form_row(form.video) }}
+    {{ form_row(form.lien) }}
+    {{ form_row(form.what) }}
+    {{ form_row(form.why) }}
+    {{ form_row(form.cover) }}
+    {{ form_row(form.thumbnail) }}
     <div class="methodLinks-container">
         <label class="col-form-label">Screenshots</label>
         <div class="js-methodLink-wrapper"
@@ -19,13 +23,10 @@
             {% endfor %}
         </div>
         <a href="#" class="js-add-methodLink">
-            <label class="col-form-label text-white">Ajouter un screenshot</label>
+            <label class="col-form-label">Ajouter un screenshot</label>
         </a>
     </div>
-    {{ form_row(form.video) }}
-    {{ form_row(form.lien) }}
-    {{ form_row(form.what) }}
-    {{ form_row(form.why) }}
-    <button class="btn btn-secondary form-button mt-2">{{ button_label|default('Creer le jeu') }}</button>
+    <button class="nes-btn is-success">{{ button_label|default('Creer le jeu') }}</button>
     {{ form_end(form) }}
+</div>
 </div>
