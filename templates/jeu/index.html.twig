@@ -9,7 +9,7 @@
 
             {% for jeu in jeux %}
                 <div class="col-6 col-md-4 col-xl-3">
-                    <a href="{{ path('jeu_show', {'id': jeu.id}) }}">
+                    <a href="{{ path('jeu_show', {'slug': jeu.slug}) }}">
                         <div class="card media-card mb-4">
                             <img class="card-img-top" src="{{ asset('uploads/jeux/thumbnails/' ~ jeu.thumbnail) }}">
                             <div class="card-body">

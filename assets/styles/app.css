@@ -7851,7 +7851,8 @@ body {
       opacity: 1; }
 
 .jeu_show .cover {
-  position: relative; }
+  position: relative;
+  width: 100%; }
   .jeu_show .cover::after {
     content: "";
     position: absolute;

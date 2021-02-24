@@ -6,6 +6,7 @@ use App\Entity\Jeu;
 use App\Form\JeuType;
 use App\Repository\JeuRepository;
 use App\Service\FileUploader;
+use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,15 +59,19 @@ class JeuController extends AbstractController
      * @Route("/new", name="jeu_new", methods={"GET","POST"})
      * @param Request $request
      * @param FileUploader $fileUploader
+     * @param Slugify $slugify
      * @return Response
      */
-    public function new(Request $request, FileUploader $fileUploader): Response
+    public function new(Request $request, FileUploader $fileUploader, Slugify $slugify): Response
     {
         $jeu = new Jeu();
         $form = $this->createForm(JeuType::class, $jeu);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $slug = $slugify->generate($jeu->getNom());
+            $jeu->setSlug($slug);
 
             $cover = $form->get('cover')->getData();
             if ($cover) {
@@ -101,7 +106,9 @@ class JeuController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="jeu_show", methods={"GET"})
+     * @Route("/{slug}", name="jeu_show", methods={"GET"})
+     * @param Jeu $jeu
+     * @return Response
      */
     public function show(Jeu $jeu): Response
     {

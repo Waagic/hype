@@ -75,6 +75,11 @@ class Jeu
      */
     private $thumbnail;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->screenshot = new ArrayCollection();
@@ -219,6 +224,18 @@ class Jeu
     public function setThumbnail(string $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
