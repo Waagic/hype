@@ -16,19 +16,33 @@
                 <h2 class="title">Il m'a hypé le con</h2>
 
                 <div class="d-flex">
-                    {% for jeu in userJeux|slice(0, 1) %}
-                        <div class="col-6 col-md-4 col-xl-3">
-                            <a href="{{ path('game_show', {'slug': jeu.slug}) }}">
-                                <div class="card media-card mb-4">
-                                    <img class="card-img-top"
-                                         src="{{ asset('uploads/jeux/thumbnails/' ~ jeu.thumbnail) }}">
-                                    <div class="card-body">
-                                        <p class="card-title">{{ jeu.nom }}</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
+                    <div class="row w-100">
+                        {% for jeu in userJeux|slice(0, 1) %}
+                            <div class="col-6 col-md-4 col-xl-3">
+                                <a class="game-link" href="{{ path('game_show', {'slug': jeu.slug}) }}">
+                                    <section class="cartridge">
+                                        <div class="case">
+                                            <figure class="front">
+                                                <figure class="base tall"></figure>
+                                                <figure class="base wide"></figure>
+                                                <figure class="linebase"></figure>
+                                                <figure class="line one"></figure>
+                                                <figure class="line two"></figure>
+                                                <figure class="line three"></figure>
+                                                <figure class="line four"></figure>
+                                                <figure class="leftindent"></figure>
+                                                <figure class="rightindent"></figure>
+                                                <figure class="oval"></figure>
+                                                <figure class="label"
+                                                        style="background-image: url({{ asset('uploads/jeux/thumbnails/' ~ jeu.thumbnail) }})"></figure>
+                                            </figure>
+                                        </div>
+                                    </section>
+                                    <div class="game-name">{{ jeu.name }}</div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         {% endif %}
