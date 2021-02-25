@@ -37,13 +37,13 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Jeu::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Game::class, inversedBy="users")
      */
-    private $jeux;
+    private $games;
 
     public function __construct()
     {
-        $this->jeux = new ArrayCollection();
+        $this->games = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -128,32 +128,32 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Jeu[]
+     * @return Collection|Game[]
      */
-    public function getJeux(): Collection
+    public function getGames(): Collection
     {
-        return $this->jeux;
+        return $this->games;
     }
 
-    public function addJeux(Jeu $jeux): self
+    public function addGames(Game $games): self
     {
-        if (!$this->jeux->contains($jeux)) {
-            $this->jeux[] = $jeux;
+        if (!$this->games->contains($games)) {
+            $this->games[] = $games;
         }
 
         return $this;
     }
 
-    public function removeJeux(Jeu $jeux): self
+    public function removeGames(Game $games): self
     {
-        $this->jeux->removeElement($jeux);
+        $this->games->removeElement($games);
 
         return $this;
     }
 
-    public function isLiked(Jeu $jeux): bool
+    public function isLiked(Game $games): bool
     {
-        if ($this->jeux->contains($jeux)) {
+        if ($this->games->contains($games)) {
             return 1;
         } else {
             return 0;

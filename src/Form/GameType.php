@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Jeu;
+use App\Entity\Game;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -10,12 +10,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class JeuType extends AbstractType
+class GameType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
+            ->add('name')
             ->add('cover', FileType::class, [
                 'label' => 'Cover',
                 'mapped' => false,
@@ -45,7 +45,7 @@ class JeuType extends AbstractType
                 ],
             ])
             ->add('genre')
-            ->add('prix')
+            ->add('price')
             ->add('screenshot', CollectionType::class, [
                 'entry_type' => ScreenshotType::class,
                 'label' => false,
@@ -55,7 +55,7 @@ class JeuType extends AbstractType
                 'by_reference' => false,
             ])
             ->add('video')
-            ->add('lien')
+            ->add('link')
             ->add('what')
             ->add('why')
         ;
@@ -64,7 +64,7 @@ class JeuType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Jeu::class,
+            'data_class' => Game::class,
         ]);
     }
 }

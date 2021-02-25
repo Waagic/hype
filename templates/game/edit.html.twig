@@ -7,13 +7,13 @@
         <div class="nes-container with-title mt-5">
             <h1 class="title">Edit Jeu</h1>
 
-            {{ include('jeu/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ include('game/_form.html.twig', {'button_label': 'Update'}) }}
 
             <div class="boutons d-flex justify-content-center align-items-center">
-                <a class="nes-btn mt-3 w-100" href="{{ path('jeu_index') }}">Retour à la liste</a>
+                <a class="nes-btn mt-3 w-100" href="{{ path('game_index') }}">Retour à la liste</a>
             </div>
 
-            {{ include('jeu/_delete_form.html.twig') }}
+            {{ include('game/_delete_form.html.twig') }}
         </div>
     </div>
 {% endblock %}

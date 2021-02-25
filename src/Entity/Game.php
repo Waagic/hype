@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\JeuRepository;
+use App\Repository\GameRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=JeuRepository::class)
+ * @ORM\Entity(repositoryClass=GameRepository::class)
  */
-class Jeu
+class Game
 {
     /**
      * @ORM\Id
@@ -22,7 +22,7 @@ class Jeu
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -32,7 +32,7 @@ class Jeu
     /**
      * @ORM\Column(type="float")
      */
-    private $prix;
+    private $price;
 
     /**
      * @ORM\Column(type="string")
@@ -42,7 +42,7 @@ class Jeu
     /**
      * @ORM\Column(type="string")
      */
-    private $lien;
+    private $link;
 
     /**
      * @ORM\Column(type="text")
@@ -57,7 +57,7 @@ class Jeu
     /**
      * @ORM\OneToMany(
      *     targetEntity=Screenshot::class,
-     *     mappedBy="jeu",
+     *     mappedBy="game",
      *     orphanRemoval=true,
      *     fetch="EXTRA_LAZY",
      *     cascade={"persist"}
@@ -81,7 +81,7 @@ class Jeu
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="jeux")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="games")
      */
     private $users;
 
@@ -96,14 +96,14 @@ class Jeu
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
-    public function setNom(string $nom): self
+    public function setName(string $name): self
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
@@ -120,14 +120,14 @@ class Jeu
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getPrice(): ?float
     {
-        return $this->prix;
+        return $this->price;
     }
 
-    public function setPrix(float $prix): self
+    public function setPrice(float $price): self
     {
-        $this->prix = $prix;
+        $this->price = $price;
 
         return $this;
     }
@@ -144,14 +144,14 @@ class Jeu
         return $this;
     }
 
-    public function getLien(): ?string
+    public function getLink(): ?string
     {
-        return $this->lien;
+        return $this->link;
     }
 
-    public function setLien(string $lien): self
+    public function setLink(string $link): self
     {
-        $this->lien = $lien;
+        $this->link = $link;
 
         return $this;
     }
@@ -192,7 +192,7 @@ class Jeu
     {
         if (!$this->screenshot->contains($screenshot)) {
             $this->screenshot[] = $screenshot;
-            $screenshot->setJeu($this);
+            $screenshot->setGame($this);
         }
 
         return $this;
@@ -202,8 +202,8 @@ class Jeu
     {
         if ($this->screenshot->removeElement($screenshot)) {
             // set the owning side to null (unless already changed)
-            if ($screenshot->getJeu() === $this) {
-                $screenshot->setJeu(null);
+            if ($screenshot->getGame() === $this) {
+                $screenshot->setGame(null);
             }
         }
 
@@ -258,7 +258,7 @@ class Jeu
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addJeux($this);
+            $user->addGames($this);
         }
 
         return $this;
@@ -267,7 +267,7 @@ class Jeu
     public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
-            $user->removeJeux($this);
+            $user->removeGames($this);
         }
 
         return $this;

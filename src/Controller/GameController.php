@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Jeu;
-use App\Form\JeuType;
-use App\Repository\JeuRepository;
+use App\Entity\Game;
+use App\Form\GameType;
+use App\Repository\GameRepository;
 use App\Repository\UserRepository;
 use App\Service\FileUploader;
 use App\Service\Slugify;
@@ -18,10 +18,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 /**
  * @Route("/")
  */
-class JeuController extends AbstractController
+class GameController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -46,25 +48,29 @@ class JeuController extends AbstractController
     }
 
     /**
-     * @Route("/", name="jeu_index", methods={"GET"})
-     * @param JeuRepository $jeuRepository
+     * @Route("/", name="game_index", methods={"GET"})
+     * @param GameRepository $gameRepository
      * @return Response
      */
-    public function index(JeuRepository $jeuRepository): Response
+    public function index(GameRepository $gameRepository): Response
     {
         if ($this->getUser()) {
-            $userJeux = $this->getUser()->getJeux();
+            $userGames = $this->getUser()->getGames();
         } else {
-            $userJeux = null;
+            $userGames = null;
         }
-        return $this->render('jeu/index.html.twig', [
-            'jeux' => $jeuRepository->findAll(),
-            'userJeux' => $userJeux,
+        return $this->render('game/index.html.twig', [
+            'jeux' => $gameRepository->findBy([
+
+                ],
+                ['id' => 'DESC']
+            ),
+            'userJeux' => $userGames,
         ]);
     }
 
     /**
-     * @Route("/new", name="jeu_new", methods={"GET","POST"})
+     * @Route("/new", name="game_new", methods={"GET","POST"})
      * @param Request $request
      * @param FileUploader $fileUploader
      * @param Slugify $slugify
@@ -72,25 +78,25 @@ class JeuController extends AbstractController
      */
     public function new(Request $request, FileUploader $fileUploader, Slugify $slugify): Response
     {
-        $jeu = new Jeu();
-        $form = $this->createForm(JeuType::class, $jeu);
+        $game = new Game();
+        $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $slug = $slugify->generate($jeu->getNom());
-            $jeu->setSlug($slug);
+            $slug = $slugify->generate($game->getName());
+            $game->setSlug($slug);
 
             $cover = $form->get('cover')->getData();
             if ($cover) {
                 $pictureFileName = $fileUploader->upload($cover, $this->getParameter('covers_directory'));
-                $jeu->setCover($pictureFileName);
+                $game->setCover($pictureFileName);
             }
 
             $thumbnail = $form->get('thumbnail')->getData();
             if ($thumbnail) {
                 $pictureFileName = $fileUploader->upload($thumbnail, $this->getParameter('thumbnails_directory'));
-                $jeu->setThumbnail($pictureFileName);
+                $game->setThumbnail($pictureFileName);
             }
 
             $screenshots = $form->get('screenshot')->all();
@@ -101,43 +107,47 @@ class JeuController extends AbstractController
                 }
             }
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($jeu);
+            $entityManager->persist($game);
             $entityManager->flush();
 
-            return $this->redirectToRoute('jeu_index');
+            return $this->redirectToRoute('game_index');
         }
 
-        return $this->render('jeu/new.html.twig', [
-            'jeu' => $jeu,
+        return $this->render('game/new.html.twig', [
+            'jeu' => $game,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{slug}", name="jeu_show", methods={"GET"})
-     * @param Jeu $jeu
+     * @Route("/{slug}", name="game_show", methods={"GET"})
+     * @param Game $game
      * @return Response
      */
-    public function show(Jeu $jeu): Response
+    public function show(Game $game): Response
     {
         $user = $this->getUser();
-        $like = $user->isLiked($jeu);
-        return $this->render('jeu/show.html.twig', [
-            'jeu' => $jeu,
+        if ($user) {
+            $like = $user->isLiked($game);
+        } else {
+            $like = 0;
+        }
+        return $this->render('game/show.html.twig', [
+            'jeu' => $game,
             'like' => $like,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="jeu_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="game_edit", methods={"GET","POST"})
      * @param Request $request
-     * @param Jeu $jeu
+     * @param Game $game
      * @param FileUploader $fileUploader
      * @return Response
      */
-    public function edit(Request $request, Jeu $jeu, FileUploader $fileUploader): Response
+    public function edit(Request $request, Game $game, FileUploader $fileUploader): Response
     {
-        $form = $this->createForm(JeuType::class, $jeu);
+        $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -146,13 +156,13 @@ class JeuController extends AbstractController
             $cover = $form->get('cover')->getData();
             if ($cover) {
                 $pictureFileName = $fileUploader->upload($cover, $this->getParameter('covers_directory'));
-                $jeu->setCover($pictureFileName);
+                $game->setCover($pictureFileName);
             }
 
             $thumbnail = $form->get('thumbnail')->getData();
             if ($thumbnail) {
                 $pictureFileName = $fileUploader->upload($thumbnail, $this->getParameter('thumbnails_directory'));
-                $jeu->setThumbnail($pictureFileName);
+                $game->setThumbnail($pictureFileName);
             }
 
             foreach ($screenshots as $screenshot) {
@@ -165,62 +175,65 @@ class JeuController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('jeu_index');
+            return $this->redirectToRoute('game_index');
         }
 
-        return $this->render('jeu/edit.html.twig', [
-            'jeu' => $jeu,
+        return $this->render('game/edit.html.twig', [
+            'jeu' => $game,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="jeu_delete", methods={"DELETE"})
+     * @Route("/{id}", name="game_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Game $game
+     * @return Response
      */
-    public function delete(Request $request, Jeu $jeu): Response
+    public function delete(Request $request, Game $game): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $jeu->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $game->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($jeu);
+            $entityManager->remove($game);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('jeu_index');
+        return $this->redirectToRoute('game_index');
     }
 
     /**
-     * @Route("/like/{id}", name="jeu_like", methods={"GET"})
-     * @param Jeu $jeu
+     * @Route("/like/{id}", name="game_like", methods={"GET"})
+     * @param Game $game
      * @param UserRepository $userRepository
      * @param UserInterface $user
      * @return Response
      */
-    public function like(Jeu $jeu, UserRepository $userRepository, UserInterface $user): Response
+    public function like(Game $game, UserRepository $userRepository, UserInterface $user): Response
     {
         $user = $this->getUser();
-        $user->addJeux($jeu);
+        $user->addGames($game);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
-        return $this->redirectToRoute("jeu_show", [
-            "slug" => $jeu->getSlug(),
+        return $this->redirectToRoute("game_show", [
+            "slug" => $game->getSlug(),
         ]);
     }
 
     /**
-     * @Route("/unlike/{id}", name="jeu_unlike", methods={"GET"})
-     * @param Jeu $jeu
+     * @Route("/unlike/{id}", name="game_unlike", methods={"GET"})
+     * @param Game $game
      * @param UserRepository $userRepository
      * @param UserInterface $user
      * @return Response
      */
-    public function unlike(Jeu $jeu, UserRepository $userRepository, UserInterface $user): Response
+    public function unlike(Game $game, UserRepository $userRepository, UserInterface $user): Response
     {
         $user = $this->getUser();
-        $user->removeJeux($jeu);
+        $user->removeGames($game);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
-        return $this->redirectToRoute("jeu_show", [
-            "slug" => $jeu->getSlug(),
+        return $this->redirectToRoute("game_show", [
+            "slug" => $game->getSlug(),
         ]);
     }
 }

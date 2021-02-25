@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+    <header>
+        <a class="nes-btn is-primary" href="{{ path('game_index') }}"><i class="nes-logo"></i></a>
+    </header>
+{% endblock %}
+
 {% block title %}All aboard the hype train !{% endblock %}
 
 {% block body %}
@@ -11,7 +17,7 @@
                 <div class="d-flex">
                     {% for jeu in userJeux|slice(0, 1) %}
                         <div class="col-6 col-md-4 col-xl-3">
-                            <a href="{{ path('jeu_show', {'slug': jeu.slug}) }}">
+                            <a href="{{ path('game_show', {'slug': jeu.slug}) }}">
                                 <div class="card media-card mb-4">
                                     <img class="card-img-top"
                                          src="{{ asset('uploads/jeux/thumbnails/' ~ jeu.thumbnail) }}">
@@ -32,11 +38,11 @@
             <div class="d-flex">
                 {% for jeu in jeux %}
                     <div class="col-6 col-md-4 col-xl-3">
-                        <a href="{{ path('jeu_show', {'slug': jeu.slug}) }}">
+                        <a href="{{ path('game_show', {'slug': jeu.slug}) }}">
                             <div class="card media-card mb-4">
                                 <img class="card-img-top" src="{{ asset('uploads/jeux/thumbnails/' ~ jeu.thumbnail) }}">
                                 <div class="card-body">
-                                    <p class="card-title">{{ jeu.nom }}</p>
+                                    <p class="card-title">{{ jeu.name }}</p>
                                 </div>
                             </div>
                         </a>
@@ -47,7 +53,7 @@
             </div>
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="nes-btn is-success" href="{{ path('jeu_new') }}">Create new</a>
+                <a class="nes-btn is-success" href="{{ path('game_new') }}">Create new</a>
             {% endif %}
         </div>
     </div>

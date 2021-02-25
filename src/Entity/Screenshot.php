@@ -28,9 +28,9 @@ class Screenshot
     private $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Jeu::class, inversedBy="screenshot")
+     * @ORM\ManyToOne(targetEntity=Game::class, inversedBy="screenshot")
      */
-    private $jeu;
+    private $game;
 
     public function getId(): ?int
     {
@@ -61,14 +61,14 @@ class Screenshot
         return $this;
     }
 
-    public function getJeu(): ?Jeu
+    public function getGame(): ?Game
     {
-        return $this->jeu;
+        return $this->game;
     }
 
-    public function setJeu(?Jeu $jeu): self
+    public function setGame(?Game $game): self
     {
-        $this->jeu = $jeu;
+        $this->game = $game;
 
         return $this;
     }
