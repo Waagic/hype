@@ -37,10 +37,10 @@
             <h2 class="title">Dernières trouvailles</h2>
 
             <div class="d-flex">
-                {% for jeu in jeux %}
-                    <div class="col-6 col-md-4 col-xl-3">
-                        <a href="{{ path('game_show', {'slug': jeu.slug}) }}">
-                            <div id="table mb-5">
+                <div class="row">
+                    {% for jeu in jeux %}
+                        <div class="col-6 col-md-4 col-xl-3">
+                            <a class="game-link" href="{{ path('game_show', {'slug': jeu.slug}) }}">
                                 <section class="cartridge">
                                     <div class="case">
                                         <figure class="front">
@@ -54,16 +54,18 @@
                                             <figure class="leftindent"></figure>
                                             <figure class="rightindent"></figure>
                                             <figure class="oval"></figure>
-                                            <figure class="label" style="background-image: url({{ asset('uploads/jeux/thumbnails/' ~ jeu.thumbnail) }})"></figure>
+                                            <figure class="label"
+                                                    style="background-image: url({{ asset('uploads/jeux/thumbnails/' ~ jeu.thumbnail) }})"></figure>
                                         </figure>
                                     </div>
                                 </section>
-                            </div>
-                        </a>
-                    </div>
-                {% else %}
-                    no records found
-                {% endfor %}
+                                <div class="game-name">{{ jeu.name }}</div>
+                            </a>
+                        </div>
+                    {% else %}
+                        no records found
+                    {% endfor %}
+                </div>
             </div>
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}

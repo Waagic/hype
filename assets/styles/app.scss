@@ -6,6 +6,15 @@ body {
   position: relative;
 }
 
+a {
+  color: black;
+
+  &:hover {
+    text-decoration: none;
+    color: black;
+  }
+}
+
 header{
   display: flex;
   justify-content: flex-end;
@@ -20,46 +29,22 @@ header{
   }
 }
 
-.media-card {
-  position: relative;
+.game-link {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  transition: background-color 0.5s ease-in-out;
-
-  .card-img-top {
-    transition: opacity 0.5s ease-in-out;
-    object-fit: cover;
-    height: 300px;
-    border-radius: calc(0.25rem - 1px);
-  }
-
-  .card-body {
-    position: absolute;
-    opacity: 0;
-    z-index: 1;
-    transition: opacity 0.5s ease-in-out;
-
-    .card-title {
-      color: white;
-      text-align: center;
-      font-size: 0.8em;
-      margin-bottom: 0;
-    }
-
-  }
+  position: relative;
+  top: 0;
+  transition: top ease-out 0.3s;
 
   &:hover {
-    background-color: #222222;
-
-    .card-img-top {
-      opacity: 0.5;
-    }
-
-    .card-body {
-      opacity: 1;
-    }
+    top: -10px;
   }
+}
+
+.game-name {
+  text-align: center;
+  padding: 1em;
 }
 
 .jeu_show {

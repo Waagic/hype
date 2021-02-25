@@ -7824,6 +7824,12 @@ body {
   font-family: "Press Start 2P", serif;
   position: relative; }
 
+a {
+  color: black; }
+  a:hover {
+    text-decoration: none;
+    color: black; }
+
 header {
   display: flex;
   justify-content: flex-end;
@@ -7835,33 +7841,19 @@ header {
     width: 100%;
     z-index: 2; }
 
-.media-card {
-  position: relative;
+.game-link {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  transition: background-color 0.5s ease-in-out; }
-  .media-card .card-img-top {
-    transition: opacity 0.5s ease-in-out;
-    object-fit: cover;
-    height: 300px;
-    border-radius: calc(0.25rem - 1px); }
-  .media-card .card-body {
-    position: absolute;
-    opacity: 0;
-    z-index: 1;
-    transition: opacity 0.5s ease-in-out; }
-    .media-card .card-body .card-title {
-      color: white;
-      text-align: center;
-      font-size: 0.8em;
-      margin-bottom: 0; }
-  .media-card:hover {
-    background-color: #222222; }
-    .media-card:hover .card-img-top {
-      opacity: 0.5; }
-    .media-card:hover .card-body {
-      opacity: 1; }
+  position: relative;
+  top: 0;
+  transition: top ease-out 0.3s; }
+  .game-link:hover {
+    top: -10px; }
+
+.game-name {
+  text-align: center;
+  padding: 1em; }
 
 .jeu_show .cover {
   position: relative;
@@ -7943,7 +7935,7 @@ figure {
       background-color: #a7a9ac;
       width: 104%;
       left: -2%;
-      height: calc(15%/9); }
+      height: calc(15% / 9); }
     .cartridge .front .leftindent, .cartridge .front .rightindent, .cartridge .back .leftindent, .cartridge .back .rightindent {
       position: absolute;
       height: 65%;
@@ -7993,7 +7985,7 @@ figure {
   /* Chrome10-25,Safari5.1-6 */
   background: radial-gradient(ellipse at center, #f0f9ff 0%, #a7a9ac 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#d3e3ff',GradientType=1 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f9ff', endColorstr='#d3e3ff', GradientType=1);
   /* IE6-9 fallback on horizontal gradient */ }
 
 #centeralign {

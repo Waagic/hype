@@ -62,7 +62,7 @@ figure {
       background-color: $base-color;
       width: 104%;
       left: -2%;
-      height: calc(15%/9);
+      height: calc(15% / 9);
     }
 
     .leftindent, .rightindent {
@@ -127,9 +127,9 @@ figure {
   display: table;
   background: #f0f9ff; /* Old browsers */
   background: -moz-radial-gradient(center, ellipse cover, #f0f9ff 0%, #a7a9ac 100%); /* FF3.6-15 */
-  background: -webkit-radial-gradient(center, ellipse cover, #f0f9ff 0%,#a7a9ac 100%); /* Chrome10-25,Safari5.1-6 */
-  background: radial-gradient(ellipse at center, #f0f9ff 0%,#a7a9ac 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#d3e3ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: -webkit-radial-gradient(center, ellipse cover, #f0f9ff 0%, #a7a9ac 100%); /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(ellipse at center, #f0f9ff 0%, #a7a9ac 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f9ff', endColorstr='#d3e3ff', GradientType=1); /* IE6-9 fallback on horizontal gradient */
 }
 
 #centeralign {
