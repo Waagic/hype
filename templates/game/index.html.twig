@@ -10,9 +10,10 @@
 
 {% block body %}
     <div class="container">
+        <h1>hype.</h1>
         {% if userJeux is not empty %}
             <div class="nes-container with-title mt-5">
-                <h1 class="title">Il m'a hypé le con</h1>
+                <h2 class="title">Il m'a hypé le con</h2>
 
                 <div class="d-flex">
                     {% for jeu in userJeux|slice(0, 1) %}
@@ -33,17 +34,30 @@
         {% endif %}
 
         <div class="nes-container with-title mt-5">
-            <h1 class="title">Dernières trouvailles</h1>
+            <h2 class="title">Dernières trouvailles</h2>
 
             <div class="d-flex">
                 {% for jeu in jeux %}
                     <div class="col-6 col-md-4 col-xl-3">
                         <a href="{{ path('game_show', {'slug': jeu.slug}) }}">
-                            <div class="card media-card mb-4">
-                                <img class="card-img-top" src="{{ asset('uploads/jeux/thumbnails/' ~ jeu.thumbnail) }}">
-                                <div class="card-body">
-                                    <p class="card-title">{{ jeu.name }}</p>
-                                </div>
+                            <div id="table mb-5">
+                                <section class="cartridge">
+                                    <div class="case">
+                                        <figure class="front">
+                                            <figure class="base tall"></figure>
+                                            <figure class="base wide"></figure>
+                                            <figure class="linebase"></figure>
+                                            <figure class="line one"></figure>
+                                            <figure class="line two"></figure>
+                                            <figure class="line three"></figure>
+                                            <figure class="line four"></figure>
+                                            <figure class="leftindent"></figure>
+                                            <figure class="rightindent"></figure>
+                                            <figure class="oval"></figure>
+                                            <figure class="label" style="background-image: url({{ asset('uploads/jeux/thumbnails/' ~ jeu.thumbnail) }})"></figure>
+                                        </figure>
+                                    </div>
+                                </section>
                             </div>
                         </a>
                     </div>
