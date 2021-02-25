@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Jeu;
 use App\Form\JeuType;
 use App\Repository\JeuRepository;
+use App\Repository\UserRepository;
 use App\Service\FileUploader;
 use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -52,6 +54,7 @@ class JeuController extends AbstractController
     {
         return $this->render('jeu/index.html.twig', [
             'jeux' => $jeuRepository->findAll(),
+            'userJeux' => $this->getUser()->getJeux(),
         ]);
     }
 
@@ -112,8 +115,11 @@ class JeuController extends AbstractController
      */
     public function show(Jeu $jeu): Response
     {
+        $user = $this->getUser();
+        $like = $user->isLiked($jeu);
         return $this->render('jeu/show.html.twig', [
             'jeu' => $jeu,
+            'like' => $like,
         ]);
     }
 
@@ -168,12 +174,48 @@ class JeuController extends AbstractController
      */
     public function delete(Request $request, Jeu $jeu): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$jeu->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $jeu->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($jeu);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('jeu_index');
+    }
+
+    /**
+     * @Route("/like/{id}", name="jeu_like", methods={"GET"})
+     * @param Jeu $jeu
+     * @param UserRepository $userRepository
+     * @param UserInterface $user
+     * @return Response
+     */
+    public function like(Jeu $jeu, UserRepository $userRepository, UserInterface $user): Response
+    {
+        $user = $this->getUser();
+        $user->addJeux($jeu);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+        return $this->redirectToRoute("jeu_show", [
+            "slug" => $jeu->getSlug(),
+        ]);
+    }
+
+    /**
+     * @Route("/unlike/{id}", name="jeu_unlike", methods={"GET"})
+     * @param Jeu $jeu
+     * @param UserRepository $userRepository
+     * @param UserInterface $user
+     * @return Response
+     */
+    public function unlike(Jeu $jeu, UserRepository $userRepository, UserInterface $user): Response
+    {
+        $user = $this->getUser();
+        $user->removeJeux($jeu);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+        return $this->redirectToRoute("jeu_show", [
+            "slug" => $jeu->getSlug(),
+        ]);
     }
 }

@@ -14,7 +14,14 @@
             </div>
         </div>
         <div class="container">
-            <h1>{{ jeu.nom }}</h1>
+            <div class="d-flex flex-column align-items-center">
+                <h1 class="mb-5">{{ jeu.nom }}</h1>
+                {% if like == 0 %}
+                    <a class="nes-btn is-warning" href="{{ path('jeu_like', {'id': jeu.id}) }}"><i class="nes-icon coin is-small mr-2"></i>hype</a>
+                {% else %}
+                    <a class="nes-btn is-error" href="{{ path('jeu_unlike', {'id': jeu.id}) }}"><i class="nes-icon heart is-empty is-small mr-2"></i>unhype</a>
+                {% endif %}
+            </div>
             <div class="infos nes-container with-title mt-5">
                 <p class="title">Infos</p>
                 <ul class="nes-list is-circle">

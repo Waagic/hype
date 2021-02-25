@@ -4,8 +4,30 @@
 
 {% block body %}
     <div class="container">
+        {% if userJeux is not empty %}
+            <div class="nes-container with-title mt-5">
+                <h1 class="title">Il m'a hypé le con</h1>
+
+                <div class="d-flex">
+                    {% for jeu in userJeux|slice(0, 1) %}
+                        <div class="col-6 col-md-4 col-xl-3">
+                            <a href="{{ path('jeu_show', {'slug': jeu.slug}) }}">
+                                <div class="card media-card mb-4">
+                                    <img class="card-img-top"
+                                         src="{{ asset('uploads/jeux/thumbnails/' ~ jeu.thumbnail) }}">
+                                    <div class="card-body">
+                                        <p class="card-title">{{ jeu.nom }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
         <div class="nes-container with-title mt-5">
-            <h1 class="title">J'suis tombé là dessus</h1>
+            <h1 class="title">Dernières trouvailles</h1>
 
             <div class="d-flex">
                 {% for jeu in jeux %}
