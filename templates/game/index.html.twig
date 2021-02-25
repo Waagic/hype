@@ -37,7 +37,7 @@
             <h2 class="title">Dernières trouvailles</h2>
 
             <div class="d-flex">
-                <div class="row">
+                <div class="row w-100">
                     {% for jeu in jeux %}
                         <div class="col-6 col-md-4 col-xl-3">
                             <a class="game-link" href="{{ path('game_show', {'slug': jeu.slug}) }}">
