@@ -64,7 +64,7 @@
             </div>
 
             <div class="boutons d-flex flex-column align-items-center">
-                <a class="nes-btn my-3 w-50" href="{{ path('jeu_index') }}">Retour à la liste</a>
+                <a class="nes-btn my-5 w-50" href="{{ path('jeu_index') }}">Retour à la liste</a>
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a class="nes-btn my-3 w-50" href="{{ path('jeu_edit', {'id': jeu.id}) }}">Editer</a>
