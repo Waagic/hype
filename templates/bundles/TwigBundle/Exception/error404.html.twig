@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}It's dangerous to go alone !{% endblock %}
+
+{% block body %}
+    <div class="container d-flex flex-column align-items-center">
+        <div class="d-flex flex-column">
+            <div class="nes-balloon balloon-404 from-left mt-5">
+                <span>Our princess is in another castle !</span>
+            </div>
+            <i class="nes-mario mt-3"></i>
+        </div>
+        <span class="error-404 mt-5">ERROR 404</span>
+        <a href="{{ path('jeu_index') }}" class="nes-btn mt-5">Ramenez moi à la maison</a>
+    </div>
+{% endblock %}

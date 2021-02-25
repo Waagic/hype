@@ -1,11 +1,11 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import "../../node_modules/nes.css/css/nes.css";
 
-body{
+body {
   font-family: "Press Start 2P", serif;
 }
 
-.media-card{
+.media-card {
   position: relative;
   display: flex;
   justify-content: center;
@@ -13,9 +13,11 @@ body{
   cursor: pointer;
   transition: background-color 0.5s ease-in-out;
 
-  .card-img-top{
+  .card-img-top {
     transition: opacity 0.5s ease-in-out;
     object-fit: cover;
+    height: 300px;
+    border-radius: calc(0.25rem - 1px);
   }
 
   .card-body {
@@ -36,9 +38,10 @@ body{
   &:hover {
     background-color: #222222;
 
-    .card-img-top{
+    .card-img-top {
       opacity: 0.5;
     }
+
     .card-body {
       opacity: 1;
     }
@@ -58,7 +61,7 @@ body{
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(0,0,0,0) 100%);
+      background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0) 100%);
     }
 
     img {
@@ -88,4 +91,12 @@ form {
     width: 100%;
   }
 
+}
+
+.balloon-404 {
+  width: fit-content;
+}
+
+.error-404 {
+  font-size: 5em;
 }
