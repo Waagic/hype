@@ -7847,7 +7847,7 @@ header {
   align-items: center;
   position: relative; }
   .game-link:hover .cartridge {
-    animation: 0.7s steps(3, end) infinite up; }
+    animation: 0.9s steps(3, end) infinite up; }
 @keyframes up {
   from {
     transform: translateY(0px); }

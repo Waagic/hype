@@ -18,7 +18,7 @@
                 <div class="d-flex">
                     <div class="row w-100">
                         {% for jeu in userJeux|slice(0, 1) %}
-                            <div class="col-6 col-md-4 col-xl-3">
+                            <div class="col-12 col-md-4 col-xl-3">
                                 <a class="game-link" href="{{ path('game_show', {'slug': jeu.slug}) }}">
                                     <section class="cartridge">
                                         <div class="case">
@@ -50,10 +50,10 @@
         <div class="nes-container with-title mt-5">
             <h2 class="title">Dernières trouvailles</h2>
 
-            <div class="d-flex">
+            <div class="d-flex justify-content-center">
                 <div class="row w-100">
                     {% for jeu in jeux %}
-                        <div class="col-6 col-md-4 col-xl-3">
+                        <div class="col-12 col-md-4 col-xl-3">
                             <a class="game-link" href="{{ path('game_show', {'slug': jeu.slug}) }}">
                                 <section class="cartridge">
                                     <div class="case">
