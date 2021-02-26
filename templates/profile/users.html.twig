@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    <header>
+        <a class="nes-btn is-primary" href="{{ path('app_index') }}"><i class="nes-logo"></i></a>
+    </header>
+{% endblock %}
+
+{% block title %}All aboard the hype train !{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>users.</h1>
+        <div class="nes-container with-title my-5">
+            <h2 class="title">Gestion des utilisateurs</h2>
+            <div class="lists">
+                <ul class="nes-list is-circle">
+                    {% for user in users %}
+                        <li>{{ user.email }} - <a href="{{ path('profile_okusers', {'id': user.id}) }}">Ok</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

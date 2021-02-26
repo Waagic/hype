@@ -2,7 +2,7 @@
 
 {% block header %}
     <header>
-        <a class="nes-btn is-primary" href="{{ path('game_index') }}"><i class="nes-logo"></i></a>
+        <a class="nes-btn is-primary" href="{{ path('profile_index') }}"><i class="nes-logo"></i></a>
     </header>
 {% endblock %}
 
@@ -17,7 +17,7 @@
 
                 <div class="d-flex">
                     <div class="row w-100">
-                        {% for jeu in userJeux|slice(0, 1) %}
+                        {% for jeu in userJeux|reverse|slice(0,4) %}
                             <div class="col-12 col-md-4 col-xl-3">
                                 <a class="game-link" href="{{ path('game_show', {'slug': jeu.slug}) }}">
                                     <section class="cartridge">
@@ -42,6 +42,11 @@
                                 </a>
                             </div>
                         {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center">
+                        <a class="nes-btn" href="{{ path('userGame_index') }}">more.</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +91,7 @@
                 <div class="col-12 d-flex justify-content-center">
                     <a class="nes-btn" href="{{ path('game_index') }}">more.</a>
 
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if is_granted('ROLE_ADMIN') %}
                         <a class="nes-btn is-success" href="{{ path('game_new') }}">Create new</a>
                     {% endif %}
                 </div>

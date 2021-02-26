@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="infos nes-container with-title mt-5">
+            <p class="title">B'soir</p>
+            {{ form_start(form) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.plainPassword.first) }}
+            {{ form_row(form.plainPassword.second) }}
+
+            <button class="nes-btn" type="submit">Register!</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

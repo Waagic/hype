@@ -52,10 +52,10 @@ class GameController extends AbstractController
      * @param GameRepository $gameRepository
      * @return Response
      */
-    public function index(GameRepository $gameRepository): Response
+    public function index(GameRepository $gameRepository, UserRepository $userRepository): Response
     {
         if ($this->getUser()) {
-            $userGames = $this->getUser()->getGames();
+            $userGames=$this->getUser()->getGames();
         } else {
             $userGames = null;
         }
@@ -88,6 +88,18 @@ class GameController extends AbstractController
     }
 
     /**
+     * @Route("/mygames", name="userGame_index", methods={"GET"})
+     * @param GameRepository $gameRepository
+     * @return Response
+     */
+    public function userGamesIndex(GameRepository $gameRepository): Response
+    {
+        return $this->render('game/user_index.html.twig', [
+            'jeux' => $this->getUser()->getGames()
+        ]);
+    }
+
+    /**
      * @Route("/new", name="game_new", methods={"GET","POST"})
      * @param Request $request
      * @param FileUploader $fileUploader
@@ -96,6 +108,7 @@ class GameController extends AbstractController
      */
     public function new(Request $request, FileUploader $fileUploader, Slugify $slugify): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $game = new Game();
         $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
@@ -165,6 +178,7 @@ class GameController extends AbstractController
      */
     public function edit(Request $request, Game $game, FileUploader $fileUploader): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
 
@@ -210,6 +224,7 @@ class GameController extends AbstractController
      */
     public function delete(Request $request, Game $game): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         if ($this->isCsrfTokenValid('delete' . $game->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($game);

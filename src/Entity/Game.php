@@ -82,6 +82,7 @@ class Game
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="games")
+     * @ORM\JoinTable(name="user_game")
      */
     private $users;
 
