@@ -34,20 +34,19 @@ header {
   flex-direction: column;
   align-items: center;
   position: relative;
-  top: 0;
-  animation: 0.6s steps(3, end) infinite alternate up;
-  @keyframes up {
-    from {
-      transform: translateY(0px)
-    }
-    to {
-      transform: translateY(-10px)
-    }
-  }
-  animation-play-state: paused;
 
   &:hover {
-    animation-play-state: running;
+    .cartridge {
+      animation: 0.7s steps(3, end) infinite up;
+      @keyframes up {
+        from {
+          transform: translateY(0px)
+        }
+        to {
+          transform: translateY(-10px)
+        }
+      }
+    }
   }
 }
 

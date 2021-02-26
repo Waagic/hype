@@ -7845,18 +7845,14 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  top: 0;
-  animation: 0.6s steps(3, end) infinite alternate up;
-  animation-play-state: paused; }
+  position: relative; }
+  .game-link:hover .cartridge {
+    animation: 0.7s steps(3, end) infinite up; }
 @keyframes up {
   from {
     transform: translateY(0px); }
   to {
     transform: translateY(-10px); } }
-  .game-link:hover {
-    animation-play-state: running; }
-
 .game-name {
   text-align: center;
   padding: 1em; }
