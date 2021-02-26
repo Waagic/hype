@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
-    <header>
-        <a class="nes-btn is-primary" href="{{ path('profile_index') }}"><i class="nes-logo"></i></a>
+    <header class="home-header mb-5">
+        <a class="nes-btn d-flex justify-content-center align-items-center ml-3 ml-md-5" href="{{ path('app_index') }}">hype.</a>
+        <a class="nes-btn is-primary mr-3 mr-md-5" href="{{ path('profile_index') }}"><i class="nes-logo"></i></a>
     </header>
 {% endblock %}
 
