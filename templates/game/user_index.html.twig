@@ -13,7 +13,7 @@
         <h1>hype.</h1>
 
         <div class="nes-container with-title mt-5">
-            <h2 class="title">Toutes mes trouvailles</h2>
+            <h2 class="title">Tous mes jeux</h2>
 
             <div class="d-flex justify-content-center">
                 <div class="row w-100">
@@ -50,10 +50,6 @@
             <div class="row">
                 <div class="col-12 d-flex justify-content-center">
                     <a class="nes-btn" href="{{ path('app_index') }}">retour.</a>
-
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a class="nes-btn is-success" href="{{ path('game_new') }}">Create new</a>
-                    {% endif %}
                 </div>
             </div>
         </div>

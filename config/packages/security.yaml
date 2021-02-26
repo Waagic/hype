@@ -35,6 +35,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/new, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/edit, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/delete, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/new, roles: ROLE_ADMIN }
+        - { path: ^/edit, roles: ROLE_ADMIN }
+        - { path: ^/delete, roles: ROLE_ADMIN }

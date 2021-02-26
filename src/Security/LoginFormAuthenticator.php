@@ -74,6 +74,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
+        if ($user->getisOK() == 0) {
+            // fail authentication with a custom error
+            throw new CustomUserMessageAuthenticationException('Ton compte a pas encore été validé');
+        }
+
         return $user;
     }
 
@@ -97,7 +102,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        return new RedirectResponse($this->urlGenerator->generate('game_index'));
+        return new RedirectResponse($this->urlGenerator->generate('app_index'));
     }
 
     protected function getLoginUrl()

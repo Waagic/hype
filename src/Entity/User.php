@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -31,6 +32,12 @@ class User implements UserInterface
     private $roles = [];
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -38,8 +45,14 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Game::class, inversedBy="users")
+     * @ORM\JoinTable(name="user_game")
      */
     private $games;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isOk;
 
     public function __construct()
     {
@@ -90,6 +103,16 @@ class User implements UserInterface
         $this->roles = $roles;
 
         return $this;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     /**
@@ -158,5 +181,17 @@ class User implements UserInterface
         } else {
             return 0;
         }
+    }
+
+    public function getIsOk(): ?bool
+    {
+        return $this->isOk;
+    }
+
+    public function setIsOk(bool $isOk): self
+    {
+        $this->isOk = $isOk;
+
+        return $this;
     }
 }
