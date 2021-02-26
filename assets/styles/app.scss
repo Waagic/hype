@@ -6,15 +6,6 @@ body {
   position: relative;
 }
 
-a {
-  color: black;
-
-  &:hover {
-    text-decoration: none;
-    color: black;
-  }
-}
-
 header {
   display: flex;
   justify-content: flex-end;

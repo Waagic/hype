@@ -7824,12 +7824,6 @@ body {
   font-family: "Press Start 2P", serif;
   position: relative; }
 
-a {
-  color: black; }
-  a:hover {
-    text-decoration: none;
-    color: black; }
-
 header {
   display: flex;
   justify-content: flex-end;
@@ -7900,6 +7894,12 @@ form {
 figure {
   margin: 0;
   position: absolute; }
+
+a.game-link {
+  color: black; }
+  a.game-link:hover {
+    text-decoration: none;
+    color: black; }
 
 .cartridge {
   display: inline-block;

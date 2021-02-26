@@ -11,6 +11,17 @@ figure {
   position: absolute;
 }
 
+a {
+  &.game-link {
+    color: black;
+
+    &:hover {
+      text-decoration: none;
+      color: black;
+    }
+  }
+}
+
 .cartridge {
   display: inline-block;
   width: $width;
