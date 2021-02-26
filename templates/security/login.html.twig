@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+    <header class="home-header">
+        <a class="nes-btn d-flex justify-content-center align-items-center ml-5" href="{{ path('app_index') }}">hype.</a>
+        <a class="nes-btn is-primary mr-5" href="{{ path('profile_index') }}"><i class="nes-logo"></i></a>
+    </header>
+{% endblock %}
+
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
