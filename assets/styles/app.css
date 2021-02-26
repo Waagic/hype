@@ -7847,9 +7847,15 @@ header {
   align-items: center;
   position: relative;
   top: 0;
-  transition: top ease-out 0.3s; }
+  animation: 0.6s steps(3, end) infinite alternate up;
+  animation-play-state: paused; }
+@keyframes up {
+  from {
+    transform: translateY(0px); }
+  to {
+    transform: translateY(-10px); } }
   .game-link:hover {
-    top: -10px; }
+    animation-play-state: running; }
 
 .game-name {
   text-align: center;
@@ -7991,8 +7997,5 @@ figure {
 #centeralign {
   display: table-cell;
   vertical-align: middle; }
-
-.label {
-  background-image: url("http://pre08.deviantart.net/d867/th/pre/i/2012/114/a/9/pokemon_yellow_cover_art_by_comunello76-d4xfrr5.png"); }
 
 /*# sourceMappingURL=app.css.map */

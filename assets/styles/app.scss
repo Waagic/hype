@@ -15,7 +15,7 @@ a {
   }
 }
 
-header{
+header {
   display: flex;
   justify-content: flex-end;
   margin: 1em 1em 0 0;
@@ -35,10 +35,19 @@ header{
   align-items: center;
   position: relative;
   top: 0;
-  transition: top ease-out 0.3s;
+  animation: 0.6s steps(3, end) infinite alternate up;
+  @keyframes up {
+    from {
+      transform: translateY(0px)
+    }
+    to {
+      transform: translateY(-10px)
+    }
+  }
+  animation-play-state: paused;
 
   &:hover {
-    top: -10px;
+    animation-play-state: running;
   }
 }
 
