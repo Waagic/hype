@@ -7874,6 +7874,9 @@ header {
     object-fit: cover; }
 .jeu_show h1 {
   text-align: center; }
+  @media (max-width: 400px) {
+    .jeu_show h1 {
+      font-size: 2em; } }
 .jeu_show h2 {
   text-align: center; }
 .jeu_show .carousel-control-next {

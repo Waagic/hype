@@ -48,7 +48,7 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/", name="game_index", methods={"GET"})
+     * @Route("/", name="app_index", methods={"GET"})
      * @param GameRepository $gameRepository
      * @return Response
      */
@@ -59,13 +59,31 @@ class GameController extends AbstractController
         } else {
             $userGames = null;
         }
-        return $this->render('game/index.html.twig', [
+        return $this->render('index.html.twig', [
             'jeux' => $gameRepository->findBy([
 
                 ],
-                ['id' => 'DESC']
+                ['id' => 'DESC'],
+                4
+
             ),
             'userJeux' => $userGames,
+        ]);
+    }
+
+    /**
+     * @Route("/games", name="game_index", methods={"GET"})
+     * @param GameRepository $gameRepository
+     * @return Response
+     */
+    public function gamesIndex(GameRepository $gameRepository): Response
+    {
+        return $this->render('game/index.html.twig', [
+            'jeux' => $gameRepository->findBy([
+
+            ],
+                ['id' => 'DESC']
+            )
         ]);
     }
 

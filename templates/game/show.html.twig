@@ -10,7 +10,7 @@
 
 {% block body %}
     <div class="jeu_show">
-        <div class="container-fluid mb-5">
+        <div class="container-fluid mb-3 mb-md-5">
             <div class="row">
                 <div class="cover">
                     <img
@@ -21,18 +21,18 @@
         </div>
         <div class="container">
             <div class="d-flex flex-column align-items-center">
-                <h1 class="mb-5">{{ jeu.name }}</h1>
+                <h1>{{ jeu.name }}</h1>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {% if like == 0 %}
-                        <a class="nes-btn is-warning" href="{{ path('game_like', {'id': jeu.id}) }}"><i
+                        <a class="nes-btn is-warning my-3" href="{{ path('game_like', {'id': jeu.id}) }}"><i
                                     class="nes-icon coin is-small mr-2"></i>hype</a>
                     {% else %}
-                        <a class="nes-btn is-error" href="{{ path('game_unlike', {'id': jeu.id}) }}"><i
+                        <a class="nes-btn is-error my-3" href="{{ path('game_unlike', {'id': jeu.id}) }}"><i
                                     class="nes-icon heart is-empty is-small mr-2"></i>unhype</a>
                     {% endif %}
                 {% endif %}
             </div>
-            <div class="infos nes-container with-title mt-5">
+            <div class="infos nes-container with-title mt-3 mt-md-5">
                 <p class="title">Infos</p>
                 <ul class="nes-list is-circle">
                     <li class="price my-2">Prix : {{ jeu.price }}€</li>
@@ -83,7 +83,7 @@
             </div>
 
             <div class="boutons d-flex flex-column align-items-center">
-                <a class="nes-btn my-5 w-50" href="{{ path('game_index') }}">Retour à la liste</a>
+                <a class="nes-btn my-5 w-50" href="{{ path('app_index') }}">Retour à la liste</a>
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a class="nes-btn my-3 w-50" href="{{ path('game_edit', {'id': jeu.id}) }}">Editer</a>
