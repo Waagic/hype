@@ -12,6 +12,17 @@ import './styles/app.scss';
 // start the Stimulus application
 import 'bootstrap';
 
+(function () {
+    const button = document.querySelector(".start-button");
+    const menu = document.querySelector(".start-menu");
+
+    button.addEventListener('click', function () {
+        menu.classList.toggle('isHidden')
+        button.classList.toggle('isClicked')
+    })
+
+})();
+
 const $ = require('jquery');
 global.jQuery = $;
 global.$ = $;

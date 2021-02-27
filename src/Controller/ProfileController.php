@@ -16,20 +16,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ProfileController extends AbstractController
 {
     /**
-     * @Route("/profile/index", name="profile_index", methods={"GET"})
-     * @param GameRepository $gameRepository
-     * @return Response
-     */
-    public function index(GameRepository $gameRepository): Response
-    {
-        if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return $this->render('profile/index.html.twig');
-        } else {
-            return $this->redirectToRoute('app_login');
-        }
-    }
-
-    /**
      * @Route("/profile/users", name="profile_users", methods={"GET"})
      * @param UserRepository $userRepository
      * @return Response
