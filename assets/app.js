@@ -16,11 +16,15 @@ import 'bootstrap';
     const button = document.querySelector(".start-button");
     const menu = document.querySelector(".start-menu");
 
-    button.addEventListener('click', function () {
+    button.addEventListener('click', function (event) {
         menu.classList.toggle('isHidden')
         button.classList.toggle('isClicked')
-    })
 
+        if (event.target != menu && event.target != button) {
+            menu.style.display = 'none';
+            console.log('bonjour');
+        }
+    })
 })();
 
 const $ = require('jquery');
