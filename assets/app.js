@@ -19,11 +19,6 @@ import 'bootstrap';
     button.addEventListener('click', function (event) {
         menu.classList.toggle('isHidden')
         button.classList.toggle('isClicked')
-
-        if (event.target != menu && event.target != button) {
-            menu.style.display = 'none';
-            console.log('bonjour');
-        }
     })
 })();
 
