@@ -2,6 +2,26 @@
 
 {% block title %}New Jeu{% endblock %}
 
+{% block header %}
+    <header class="home-header mb-5">
+        <a class="nes-btn d-flex justify-content-center align-items-center ml-3 ml-md-5" href="{{ path('app_index') }}">hype.</a>
+        <div class="d-flex flex-column">
+            <div class="nes-btn mr-3 mr-md-5 start-button">start.</div>
+            <div class="nes-container is-rounded start-menu mr-3 mr-md-5 mt-2 isHidden">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div class="mb-3"><a href="{{ path('profile_users') }}">Gérer les utilisateurs</a></div>
+                    {% endif %}
+                    <div class="mb-3"><a href="{{ path('userGame_index') }}">Mes jeux</a></div>
+                    <div class="mb-3"><a href="{{ path('app_logout') }}">Déconnexion</a></div>
+                {% else %}
+                    <a href="{{ path('app_login') }}">Connexion</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
 {% block body %}
     <div class="container">
         <div class="nes-container with-title mt-5">
